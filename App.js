@@ -30,6 +30,8 @@ export default function App() {
       {checkScreen("jogo") && (
         <Jogo
           changeScreen={changeScreen}
+          player1={jogador1}
+          player2={jogador2}
         />
       )}
     </View>

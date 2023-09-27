@@ -10,6 +10,16 @@ export default function Home({
   const [jogador2, setJogador2] = useState("");
 
   const handleClick = () => {
+
+    // if (jogador1.length < 3) {
+    //   alert("O nome do jogador 1 deve ter pelo menos 3 caracteres");
+    //   return;
+    // }
+    // if (jogador2.length < 3) {
+    //   alert("O nome do jogador 2 deve ter pelo menos 3 caracteres");
+    //   return;
+    // }
+
     if (mudarNomeJogadores) {
       mudarNomeJogadores(jogador1, jogador2)
       changeScreen("jogo")
@@ -24,7 +34,7 @@ export default function Home({
       <TextInput placeholder='Jogador 2' value={jogador2} onChangeText={setJogador2} />
       <Text>O nome do jogador 2 é: {jogador2}</Text>
 
-      <Button title='Click' onPress={handleClick} />
+      <Button title='Iniciar' onPress={handleClick} />
     </View>
   );
 }
