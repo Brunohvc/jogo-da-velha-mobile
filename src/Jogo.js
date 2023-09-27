@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 
-const startValues = [["", "", ""],["", "", ""],["", "", ""]]
+const startValues = [
+  ["", "", ""],
+  ["", "", ""],
+  ["", "", ""]
+]
 
 export default function Jogo({
   changeScreen,
@@ -9,7 +13,11 @@ export default function Jogo({
   player2
 }) {
   const [states, setStates] = useState(startValues);
-  const [player, setPlayer] = useState("X")
+  const [player, setPlayer] = useState("X");
+
+  useEffect(() => {
+    checkWin();
+  }, [states])
 
   const goBack = () => {
     changeScreen("home")
@@ -77,15 +85,14 @@ export default function Jogo({
       return;
     }
 
-    const newState = [...states]
+    const newState = [[...states[0]], [...states[1]], [...states[2]]]
     newState[line][column] = player;
-    setStates([...states]);
+    setStates(newState);
     setPlayer(player === "X" ? "O" : "X");
-    checkWin();
   }
 
   const getPlayerName = () => player === "X" ? player1 : player2;
-
+  console.log("Olá")
   return (
     <View>
       <Button title="Voltar" onPress={goBack} />
@@ -100,7 +107,7 @@ export default function Jogo({
             <View style={styles.line} key={indexLine}>
               {line.map((column, indexColumn) => (
                 <TouchableOpacity
-                  key={indexColumn}
+                  key={`${indexLine}${indexColumn}${column}`}
                   onPress={() => handleClickPosition(indexLine, indexColumn)}
                 >
                   <View style={styles.buttonGame}>
